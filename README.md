@@ -42,3 +42,5 @@ The following user stories must be completed:
 [x] Bonus: User can see embedded image media within the tweet detail view
 
 [x] Bonus: Compose activity is replaced with a modal overlay
+
+![Video Walkthrough]
