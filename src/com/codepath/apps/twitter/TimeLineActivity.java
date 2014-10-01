@@ -1,11 +1,11 @@
 package com.codepath.apps.twitter;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import com.activeandroid.ActiveAndroid;
 import com.activeandroid.util.Log;
 import com.codepath.apps.listeners.EndlessScrollListener;
 import com.codepath.apps.twitter.ComposeDialog.ComposeDialogListener;
@@ -35,7 +35,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Toast;
@@ -113,6 +112,7 @@ public class TimeLineActivity extends FragmentActivity {
 	public void fetchTimelineAsync(long page) {
 		if(!isNetworkAvailable()){
 			Toast.makeText(this, "No Internet Available", Toast.LENGTH_SHORT).show();
+			swipeContainer.setRefreshing(false);
 			return;
 		}
 		client.getLatestTweets(new JsonHttpResponseHandler() {
@@ -124,6 +124,7 @@ public class TimeLineActivity extends FragmentActivity {
 			}
 
 			public void onFailure(Throwable e) {
+				swipeContainer.setRefreshing(false);
 				Log.d("DEBUG", "Fetch timeline error: " + e.toString());
 			}
 		}, page);
@@ -166,6 +167,10 @@ public class TimeLineActivity extends FragmentActivity {
 		});
 	}
 	public void onComposeClick(MenuItem mi ){
+		if(!isNetworkAvailable()){
+			Toast.makeText(this, "No Internet Available", Toast.LENGTH_SHORT).show();
+			return;
+		}
 		FragmentManager fm = getFragmentManager();
 
 		ComposeDialog composeDialog = ComposeDialog.newInstance(myself);
@@ -174,7 +179,7 @@ public class TimeLineActivity extends FragmentActivity {
 
 			@Override
 			public void onDialogDone(Tweet tweet) {
-				getLatestTweets(tweets.get(0).getUid());
+				//getLatestTweets(tweets.get(0).getUid());
 				tweets.addFirst(tweet);
 				aTweets.notifyDataSetChanged();
 			}
@@ -210,6 +215,8 @@ public class TimeLineActivity extends FragmentActivity {
 	public void populateTimeline(long l){
 		if(!isNetworkAvailable()){
 			Toast.makeText(this, "No Internet Available", Toast.LENGTH_SHORT).show();
+			aTweets.addAll(Tweet.getAll());
+			aTweets.notifyDataSetChanged();
 			return;
 		}
 		client.getHomeTimeline(new JsonHttpResponseHandler(){
@@ -225,10 +232,16 @@ public class TimeLineActivity extends FragmentActivity {
 				
 				aTweets.addAll(Tweet.fromJSONArray(arg1));
 				aTweets.notifyDataSetChanged();
-				//					for(int i=0;i<tweets.size();i++){
-				//						tweets.get(i).save();
-				//					}
-				//	Tweet firstTweet = Tweet.load(Tweet.class, 1);
+				ActiveAndroid.beginTransaction();
+				try{
+					for(int i=0;i<tweets.size();i++){
+						tweets.get(i).save();
+					}
+					ActiveAndroid.setTransactionSuccessful();
+				}finally{
+					ActiveAndroid.endTransaction();
+				}
+					//Tweet firstTweet = Tweet.load(Tweet.class, 1);
 
 			}
 

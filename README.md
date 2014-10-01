@@ -43,4 +43,4 @@ The following user stories must be completed:
 
 [x] Bonus: Compose activity is replaced with a modal overlay
 
-![Video Walkthrough]
+![Video Walkthrough](TwitterClient.gif)

@@ -12,6 +12,7 @@ import com.codepath.apps.twitter.R.layout;
 import com.codepath.apps.twitter.models.Tweet;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
 import android.content.Context;
 
@@ -64,9 +65,17 @@ public class TweetArrayAdapter extends ArrayAdapter<Tweet> {
 	       tvBody.setText(Html.fromHtml(tweet.getBody()));
 	       
 	       tvBody.setMovementMethod(null);
+	       DisplayImageOptions options = new DisplayImageOptions.Builder()
+	       .cacheInMemory()
+	       .cacheOnDisc()
+	       .build();
+//	   imageLoader = ImageLoader.getInstance();
+//	   imageLoader.init(imageLoaderConfiguration);
+//	       
+	       
 	       ImageLoader mediaLoader = ImageLoader.getInstance();
-	       if(tweet.getMediaURL() !=""){
-	    	   mediaLoader.displayImage(tweet.getMediaURL(), ivMedia);
+	       if(tweet.getMediaURL().length() !=0){
+	    	   mediaLoader.displayImage(tweet.getMediaURL(), ivMedia, options);
 	       }else{
 	    	   ivMedia.setVisibility(View.GONE);
 	       }

@@ -5,14 +5,17 @@ import org.json.JSONObject;
 import com.activeandroid.util.Log;
 import com.codepath.apps.twitter.models.Tweet;
 import com.loopj.android.http.JsonHttpResponseHandler;
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 import android.app.Activity;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.text.Html;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -57,13 +60,18 @@ public class DetailedTweetActivity extends Activity {
 				tvRetweets.setText(tweet.getRtCount().toString());
 				tvAuthor.setText(tweet.getAuthor().getName());
 				tvDateTime.setText(tweet.getOriginalCreationAt());
-				tvText.setText(tweet.getBody());
+				tvText.setText(Html.fromHtml(tweet.getBody()));
 				tvFavorites.setText(tweet.getFavoritesCount().toString());
 				tvHandle.setText("@"+tweet.getAuthor().getScreenName());
 				ImageLoader imageLoader = ImageLoader.getInstance();
 			    // Populate the data into the template view using the data object
 			    imageLoader.displayImage(tweet.getAuthor().getProfileImgURL(), ivAuthor);
-			    imageLoader.displayImage(tweet.getMediaURL(), ivImage);
+			    if(tweet.getMediaURL().length() == 0){
+			    	ivImage.setVisibility(View.GONE);
+			    }else{
+			    	imageLoader.displayImage(tweet.getMediaURL(), ivImage);
+			    }
+
 			}
 
 			@Override

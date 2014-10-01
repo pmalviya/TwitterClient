@@ -167,6 +167,13 @@ public class Tweet extends Model implements Parcelable{
         .orderBy("Name ASC")
         .execute();
 	}
+	
+	public static List<Tweet> getAll(){
+		return new Select()
+        .from(Tweet.class)
+        .execute();
+	}
+	
 	public Tweet(){
 		super();
 	}
