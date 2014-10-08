@@ -210,7 +210,10 @@ public class TweetsListFragment extends Fragment {
 		return v;
 	}
 
-
+	public void add(Tweet tweet) {
+        tweets.addFirst(tweet);
+		aTweets.notifyDataSetChanged();
+	}
 
 
 	

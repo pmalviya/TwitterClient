@@ -60,7 +60,7 @@ public class TwitterClient extends OAuthBaseClient {
 		}
 	}
 	public void getMentionsTimeline(AsyncHttpResponseHandler handler, Long l){
-		String apiUrl = getApiUrl("statuses/mentios_timeline.json");
+		String apiUrl = getApiUrl("statuses/mentions_timeline.json");
 		// Can specify query string params directly or through RequestParams.
 		RequestParams params = new RequestParams();
 

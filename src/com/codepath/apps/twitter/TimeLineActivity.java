@@ -106,8 +106,9 @@ public class TimeLineActivity extends FragmentActivity implements TweetsListFrag
 			@Override
 			public void onDialogDone(Tweet tweet) {
 				
-//				tweets.addFirst(tweet);
-//				aTweets.notifyDataSetChanged();
+				TweetsListFragment fragment = (TweetsListFragment) 
+			        	getSupportFragmentManager().findFragmentById(R.id.flContainer);
+					fragment.add(tweet);
 			}
 		}); 
 	}
@@ -126,7 +127,9 @@ public class TimeLineActivity extends FragmentActivity implements TweetsListFrag
 
 			@Override
 			public void onDialogDone(Tweet tweet) {
-				
+				TweetsListFragment fragment = (TweetsListFragment) 
+			        	getSupportFragmentManager().findFragmentById(R.id.flContainer);
+					fragment.add(tweet);
 				//tweets.addFirst(tweet);
 				//aTweets.notifyDataSetChanged();
 			}

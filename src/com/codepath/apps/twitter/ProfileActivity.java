@@ -173,8 +173,9 @@ public class ProfileActivity extends FragmentActivity implements TweetsListFragm
 			@Override
 			public void onDialogDone(Tweet tweet) {
 				
-				//tweets.addFirst(tweet);
-				//aTweets.notifyDataSetChanged();
+				TweetsListFragment fragment = (TweetsListFragment) 
+			        	getSupportFragmentManager().findFragmentById(R.id.flContainer);
+					fragment.add(tweet);
 			}
 		}); 
 	}	
