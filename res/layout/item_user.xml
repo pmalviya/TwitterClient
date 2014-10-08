@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <ImageView
+        android:id="@+id/ivUserProf"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:contentDescription="@string/todo"/>
+
+    <TextView
+        android:id="@+id/tvUserName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/ivUserProf"
+        android:layout_alignParentTop="true"
+        android:paddingLeft="3dp"
+        android:text="@string/Name"
+        android:textColor="@android:color/background_dark" />
+
+
+    <TextView
+        android:id="@+id/tvScreenName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvUserName"
+        android:layout_toRightOf="@+id/ivUserProf"
+        android:paddingLeft="3dp"
+        android:text="@string/screenName"
+        android:textColor="@android:color/darker_gray"
+        android:textSize="12sp" />
+
+    <TextView
+        android:id="@+id/tvTagline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/ivUserProf"
+        android:layout_below="@+id/tvScreenName"
+        android:autoLink="all"
+     	android:linksClickable="true"
+        android:paddingLeft="3dp"
+        android:text="@string/text" />
+  
+
+</RelativeLayout>
