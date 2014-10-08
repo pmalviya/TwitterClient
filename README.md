@@ -1,11 +1,12 @@
-This client shows the twitter timeline with features like ability to compose a tweet or view a tweet in detailed view.
-It also persists tweets in the Sqllite and uses persisted tweets to populate timeline when app is offline.
+Twitter Client
 
-Time Spent- 17-18 hours
+This client shows the twitter timeline with features like ability to compose a tweet or view a tweet in detailed view. It also persists tweets in the Sqllite and uses persisted tweets to populate timeline when app is offline.
 
+The second part consists of adding Profile activity with use of fragments to display user timeline, mentions timeline, home timeline and followers list. It also covers sending replies to tweets. 
 
-* User Stories:
+Time Spent- 40 hours
 
+User Stories:
 The following user stories must be completed:
 
 [x] User can sign in to Twitter using OAuth login
@@ -30,8 +31,25 @@ The following user stories must be completed:
 
 [x] Optional: User can see a counter with total number of characters left for tweet
 
+[x] User can switch between Timeline and Mention views using tabs.
 
-* Advanced Stories
+[x] User can view their home timeline tweets.
+
+[x] User can view the recent mentions of their username.
+
+[x] User can scroll to bottom of either of these lists and new tweets will load ("infinite scroll"
+
+[x] User can navigate to view their own profile
+
+[x] User can see picture, tagline, # of followers, # of following, and tweets on their profile.
+
+[x] User can click on the profile image in any tweet to see another user's profile.
+
+[x] User can see picture, tagline, # of followers, # of following, and tweets of clicked user.
+
+[x] Profile view should include that user's timeline
+
+[x]  Optional: User can view following / followers list through the profile
 
 [x] Advanced: User can refresh tweets timeline by pulling down to refresh (i.e pull-to-refresh)
 
@@ -48,5 +66,23 @@ The following user stories must be completed:
 [x] Bonus: User can see embedded image media within the tweet detail view
 
 [x] Bonus: Compose activity is replaced with a modal overlay
+
+[x] Advanced: Robust error handling, check if internet is available, handle error cases, network failures
+
+[ ] Advanced: When a network request is sent, user sees an indeterminate progress indicator
+
+[x] Advanced: User can "reply" to any tweet on their home timeline
+
+[x] The user that wrote the original tweet is automatically "@" replied in compose
+
+[x] Advanced: User can click on a tweet to be taken to a "detail view" of that tweet
+
+[ ]Advanced: User can take favorite (and unfavorite) or reweet actions on a tweet
+
+[ x]Advanced: Improve the user interface and theme the app to feel twitter branded
+
+[ ] Advanced: User can search for tweets matching a particular query and see results
+
+[ ] Bonus: User can view their direct messages (or send new ones)
 
 ![Video Walkthrough](TwitterClient.gif)
