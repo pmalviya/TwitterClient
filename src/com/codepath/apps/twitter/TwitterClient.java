@@ -46,6 +46,32 @@ public class TwitterClient extends OAuthBaseClient {
 		}
 	}
 	
+	public void getListTweets(AsyncHttpResponseHandler handler, Long l, Long id) {
+		String apiUrl = getApiUrl("lists/statuses.json");
+		// Can specify query string params directly or through RequestParams.
+		RequestParams params = new RequestParams();
+		params.put("slug", "statuses");
+		params.put("owner_id", id.toString());
+		if(l>0){
+			params.put("max_id", Long.toString(l));
+			client.get(apiUrl, params, handler);
+		}else{
+			client.get(apiUrl, params, handler);
+		}
+	}
+	public void getMentionsTimeline(AsyncHttpResponseHandler handler, Long l){
+		String apiUrl = getApiUrl("statuses/mentios_timeline.json");
+		// Can specify query string params directly or through RequestParams.
+		RequestParams params = new RequestParams();
+
+		
+			if(l>0){
+				params.put("max_id", Long.toString(l));
+				client.get(apiUrl, params, handler);
+			}else{
+				client.get(apiUrl, null, handler);
+			}
+	}
 	// CHANGE THIS
 	// DEFINE METHODS for different API endpoints here
 	public void getHomeTimeline(AsyncHttpResponseHandler handler, Long l) {
@@ -63,15 +89,41 @@ public class TwitterClient extends OAuthBaseClient {
 			}
 	}
 	
+	public void getFollowersList(AsyncHttpResponseHandler handler, String userName) {
+		String apiUrl = getApiUrl("followers/list.json");
+		// Can specify query string params directly or through RequestParams.
+		RequestParams params = new RequestParams();
+		params.put("screen_name", userName);
+		
+		client.get(apiUrl, params, handler);
+			
+	}	
+	public void getUserTimeline(AsyncHttpResponseHandler handler , Long id, Long l){
+		String apiUrl = getApiUrl("statuses/user_timeline.json");
+		RequestParams params = new RequestParams();
+		params.put("user_id",id.toString() );
+
+		
+		if(l>0){
+			params.put("max_id", Long.toString(l));
+			client.get(apiUrl, params, handler);
+		}else{
+			//params.put("count", "25");
+			client.get(apiUrl, params, handler);
+		}
+	}
 	public void getMyInfo(AsyncHttpResponseHandler handler){
 		String apiUrl = getApiUrl("account/verify_credentials.json");
 		client.get(apiUrl, null, handler);
 	}
 	
-	public void sendTweet(AsyncHttpResponseHandler handler, String status){
+	public void sendTweet(AsyncHttpResponseHandler handler, String status, Long statusId){
 		String apiUrl = getApiUrl("statuses/update.json");
 		RequestParams params = new RequestParams();
 		params.put("status",status );
+		if(statusId != 0){
+			params.put("in_reply_to_status_id", statusId.toString());
+		}
 		 client.post(apiUrl, params, handler);
 	}
 	public void getTweetStatus(AsyncHttpResponseHandler handler, Long l) {

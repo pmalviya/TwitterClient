@@ -17,6 +17,7 @@ import com.activeandroid.Model;
 import com.activeandroid.annotation.Column;
 import com.activeandroid.annotation.Column.ForeignKeyAction;
 import com.activeandroid.annotation.Table;
+import com.activeandroid.query.Delete;
 import com.activeandroid.query.Select;
 
 
@@ -168,10 +169,26 @@ public class Tweet extends Model implements Parcelable{
         .execute();
 	}
 	
+	public static List<Tweet> deleteAll(){
+		return new Delete()
+		.from(Tweet.class)
+		.execute();
+	}
+	
 	public static List<Tweet> getAll(){
 		return new Select()
         .from(Tweet.class)
         .execute();
+	}
+	
+	public static void insertTweet(Tweet tweet){
+		List<Tweet> qResults = new Select().from(Tweet.class)
+				.where("uid=" + Long.toString(tweet.getUid()))
+				.execute();
+		if(qResults.size()==0){
+			User user = User.insertUser(tweet.getUser());
+			tweet.save();
+		}
 	}
 	
 	public Tweet(){

@@ -20,5 +20,6 @@
     <string name="label_compose">Compose Tweet</string>
     <string name="label_retweets">RTs</string>
     <string name="label_favorites">Favorites</string>
+    <string name="title_activity_profile">ProfileActivity</string>
 
 </resources>

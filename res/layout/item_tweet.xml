@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_height="match_parent"
+    android:descendantFocusability="blocksDescendants"  >
 
     <ImageView
         android:id="@+id/ivProfileImage"
@@ -54,16 +55,54 @@
      	android:linksClickable="true"
         android:paddingLeft="3dp"
         android:text="@string/text" />
-
     <ImageView
         android:id="@+id/ivMedia"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/tvBody"
+        android:layout_alignParentBottom="true"
+        android:layout_below="@+id/llIcons"
         android:layout_toRightOf="@+id/ivProfileImage"
         android:adjustViewBounds="true"
-        android:layout_alignParentBottom="true"
-        android:src="@drawable/ic_launcher"
-        android:contentDescription="@string/todo" />
+        android:contentDescription="@string/todo"
+        android:src="@drawable/ic_launcher" />
+
+    <LinearLayout
+        android:id="@+id/llIcons"
+       android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:weightSum="3"
+        android:layout_below="@+id/tvBody" >
+
+        <ImageButton
+            android:focusable="false"
+			android:focusableInTouchMode="false"
+            android:id="@+id/imageButton1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:layout_weight="1"
+            android:src="@drawable/ic_reply_gray" />
+
+        <ImageButton
+            android:focusable="false"
+			android:focusableInTouchMode="false"
+            android:id="@+id/imageButton3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:layout_weight="1"
+            android:src="@drawable/ic_favorite_gray" />
+
+        <ImageButton
+            android:focusable="false"
+			android:focusableInTouchMode="false"
+            android:id="@+id/imageButton2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@null"
+            android:src="@drawable/ic_retweet_gray" />
+    </LinearLayout>
 
 </RelativeLayout>

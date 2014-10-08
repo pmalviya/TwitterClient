@@ -80,7 +80,12 @@ public class ComposeDialog extends DialogFragment {
 		imageLoader.displayImage(getArguments().getString("myProfileURL"), ivMyProfileURL);
 		tvMyName.setText(getArguments().getString("myName"));
 		tvMyHandle.setText("@" +getArguments().getString("myHandle"));
-		
+		Long statusId = getArguments().getLong("status_id");
+		String username = getArguments().getString("user_name");
+		if(statusId!= 0){
+			etTweet.setText("@" +username);
+		}
+		etTweet.setTag(statusId);
 		Window window = getDialog().getWindow();
 		window.requestFeature(Window.FEATURE_NO_TITLE);
 		window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
@@ -103,7 +108,7 @@ public class ComposeDialog extends DialogFragment {
 						getDialog().dismiss();
 					}
 					
-				},etTweet.getText().toString() );
+				},etTweet.getText().toString() , (Long)etTweet.getTag());
 					
 			}
 		});
@@ -127,10 +132,22 @@ public class ComposeDialog extends DialogFragment {
 		args.putString("myName", user.getName());
 		args.putString("myHandle", user.getScreenName());
 		args.putString("myProfileURL",user.getProfileImgURL() );
+		args.putLong("status_id", 0);
+		args.putString("user_name", "");
 		frag.setArguments(args);
 		return frag;
 	}
-
+	public static ComposeDialog newInstance( User user, Long statusId, String username) {
+		ComposeDialog frag = new ComposeDialog();
+		Bundle args = new Bundle();
+		args.putString("myName", user.getName());
+		args.putString("myHandle", user.getScreenName());
+		args.putString("myProfileURL",user.getProfileImgURL() );
+		args.putLong("status_id", statusId);
+		args.putString("user_name", username);
+		frag.setArguments(args);
+		return frag;
+	}
 	
 
 }
