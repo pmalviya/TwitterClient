@@ -1,4 +1,10 @@
- * User Stories:
+This client shows the twitter timeline with features like ability to compose a tweet or view a tweet in detailed view.
+It also persists tweets in the Sqllite and uses persisted tweets to populate timeline when app is offline.
+
+Time Spent- 17-18 hours
+
+
+* User Stories:
 
 The following user stories must be completed:
 
